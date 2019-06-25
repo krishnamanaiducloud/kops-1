@@ -14,8 +14,6 @@ export NODE_SIZE="<Machine Type>"					# Worker node machine type.
 export KOPS_FEATURE_FLAGS=AlphaAllowGCE
 
 
-PROJECT=`gcloud config get-value project`
-
 if ! type kops > /dev/null; then
   	curl -Lo kops https://github.com/kubernetes/kops/releases/download/$(curl -s https://api.github.com/repos/kubernetes/kops/releases/latest | grep tag_name | cut -d '"' -f 4)/kops-linux-amd64
 	chmod +x ./kops

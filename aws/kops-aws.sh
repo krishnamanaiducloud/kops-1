@@ -15,8 +15,6 @@ export KOPS_DNS_ZONE="<DNS Zone Name>"				# DNS zone name. It should be created 
 export KOPS_FEATURE_FLAGS=AlphaAllowGCE
 
 
-PROJECT=`gcloud config get-value project`
-
 if ! type kops > /dev/null; then
   	curl -Lo kops https://github.com/kubernetes/kops/releases/download/$(curl -s https://api.github.com/repos/kubernetes/kops/releases/latest | grep tag_name | cut -d '"' -f 4)/kops-linux-amd64
 	chmod +x ./kops
@@ -27,6 +25,10 @@ if ! type kubectl > /dev/null; then
 	curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
 	chmod +x ./kubectl
 	sudo mv ./kubectl /usr/local/bin/
+fi
+
+if ! type helm > /dev/null; then
+	curl -L https://git.io/get_helm.sh | bash
 fi
 
 case "$1" in
@@ -44,6 +46,12 @@ create)
         --dns-zone=${KOPS_DNS_ZONE} 			 	 \
 		--cloud aws									 \
 		--yes
+	# Initialize helm
+	helm init
+	# Create service account for tiller
+	kubectl create serviceaccount --namespace kube-system tiller
+	kubectl create clusterrolebinding tiller-cluster-rule --clusterrole=cluster-admin --serviceaccount=kube-system:tiller
+	kubectl patch deploy --namespace kube-system tiller-deploy -p '{"spec":{"template":{"spec":{"serviceAccount":"tiller"}}}}'
 	;;
 delete)
 	# Delete Kubernetes Cluster
