@@ -1,12 +1,12 @@
 #!/bin/bash
 set -e	# Any subsequent(*) commands which fail will cause the shell script to exit immediately
 
-export KOPS_CLUSTER_NAME="myfirstcluster.k8s.local" 			# Cluster name should FQDN, example : myfirstcluster.k8s.local
+export KOPS_CLUSTER_NAME="myfirstcluster.k8s.local" 		# Cluster name should FQDN, example : myfirstcluster.k8s.local
 export S3_BUCKET_NAME="< s3 bucket name >"  	                # Provide a name to create bucket. Bucket name should be Unique globally.
 
-export S3_BUCKET_REGION="us-east-1"                             # Bucket will create in the provide region.
+export S3_BUCKET_REGION="us-east-1"                             # Bucket will create in the provided region.
 export NODE_ZONES="us-east-1a,us-east-1b,us-east-1c"	        # Worker nodes zones with comma separated.
-export MASTER_ZONES="us-east-1a"		# Master nodes zones with comma separated.
+export MASTER_ZONES="us-east-1a"				# Master nodes zones with comma separated.
 
 # https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html
 
