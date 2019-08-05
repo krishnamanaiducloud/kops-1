@@ -1,11 +1,11 @@
 #!/bin/bash
 set -e	# Any subsequent(*) commands which fail will cause the shell script to exit immediately
 
-export KOPS_CLUSTER_NAME="< clustername.hostedzone >" 			# Cluster name should FQDN, example : mycluster.your-domain.com
-export KOPS_DNS_ZONE="< hostedzone >"                          # DNS zone name. It should be created before the cluster creation
+export KOPS_CLUSTER_NAME="< clustername.hostedzone >" 		# Cluster name should FQDN, example : mycluster.your-domain.com
+export KOPS_DNS_ZONE="< hostedzone >"                          	# DNS zone name. It should be created before the cluster creation
 export S3_BUCKET_NAME="< bucket name >"  	                # Provide a name to create bucket. Bucket name should be Unique globally.
 
-export S3_BUCKET_REGION="us-east-1"                             # Bucket will create in the provide region.
+export S3_BUCKET_REGION="us-east-1"                             # Bucket will create in the provided region.
 export NODE_ZONES="us-east-1a,us-east-1b,us-east-1c"	        # Worker nodes zones with comma separated.
 export MASTER_ZONES="us-east-1a,us-east-1b,us-east-1c"		# Master nodes zones with comma separated.
 
