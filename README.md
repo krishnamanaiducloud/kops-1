@@ -1,2 +1,3 @@
-# kops
-Create Kubernetes cluster in the cloud using kops
+# kops- Kubernetes Operations
+Create Kubernetes cluster hosted on AWS or GCE
+
