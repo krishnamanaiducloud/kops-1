@@ -1,3 +1,3 @@
 # kops- Kubernetes Operations
-Create Kubernetes cluster hosted on AWS or GCE
+Create, destroy, upgrade and maintain production-grade, highly available, Kubernetes clusters hosted on AWS or GCE.
 
