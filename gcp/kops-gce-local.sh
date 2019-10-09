@@ -1,9 +1,11 @@
 #!/bin/bash
 set -e	# Any subsequent(*) commands which fail will cause the shell script to exit immediately
 
-export KOPS_CLUSTER_NAME='< myfirstcluster.k8s.local >' 		# Cluster name should FQDN, example : myfirstcluster.k8s.local
-export KOPS_VPC="< vpc name >"                              		# VPC will create with given name.
-export BUCKET_NAME="< bucket name >"  	                		# Provide a name to create bucket. Bucket name should be Unique globally.
+export PROJECT='<gcp_project_id>'
+
+export KOPS_CLUSTER_NAME='<cluster_name.k8s.local>' 		# Cluster name should FQDN, example : myfirstcluster.k8s.local
+export KOPS_VPC="<vpc_name>"                              		# VPC will create with given name.
+export BUCKET_NAME="<bucket_name>"  	                		# Provide a name to create bucket. Bucket name should be Unique globally.
 
 export BUCKET_REGION="us-east1"                            		# Bucket will create in the provided region.
 export NODE_ZONES="us-east1-b,us-east1-c,us-east1-d"	        	# Worker nodes zones with comma separated.
@@ -18,7 +20,9 @@ export NODE_SIZE="n1-standard-4"					# Worker node machine type. Change instance
 
 export KOPS_FEATURE_FLAGS=AlphaAllowGCE
 
-PROJECT=`gcloud config get-value project`
+gcloud config set project $PROJECT
+
+echo "Checking for dependencies ...."
 
 if ! type kops > /dev/null; then
 	echo "kops not found. Installing kops ......"
